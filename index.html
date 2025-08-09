@@ -1,209 +1,93 @@
-<!--
-  Drayzor Esports - Single-file website (index.html)
-  Instructions:
-  1) Copy this entire file into a file named `index.html`.
-  2) Replace values inside comments that say -- EDIT HERE -- (site title, channel id, google form src, socials).
-  3) To host for free: follow the GitHub Pages steps in the chat below (or use Netlify/Vercel).
-  4) For registration form: create a Google Form and paste the "embed" iframe src into GOOGLE_FORM_IFRAME_SRC below.
-  5) For live embed: put your YouTube channel ID in YOUTUBE_CHANNEL_ID to show live stream embed.
-
-  NOTE: Do NOT paste sensitive API keys on this page. This is a static site meant for announcing tryouts,
-  embedding a Google Form, and embedding your YouTube/Twitch live stream.
--->
-
-<!doctype html>
-<html lang="hi">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Drayzor Esports - BGMI Tryouts</title>
-  <meta name="description" content="Drayzor Esports BGMI tryouts, register, schedule, live streaming info">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root{--bg:#0b1020;--card:#0f1724;--accent:#6ee7b7;--muted:#9aa4bf;--glass: rgba(255,255,255,0.03)}
-    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
-    body{margin:0;background:linear-gradient(180deg,#030317 0%, #071033 100%);color:#e6eef8}
-    .container{max-width:1100px;margin:0 auto;padding:28px}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,#6ee7b7,#60a5fa);display:flex;align-items:center;justify-content:center;font-weight:800;color:#06233a}
-    nav a{color:var(--muted);text-decoration:none;margin-left:18px}
-    .hero{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:26px;border-radius:12px;display:grid;grid-template-columns:1fr 380px;gap:20px;align-items:center}
-    h1{margin:0;font-size:26px}
-    p.lead{color:var(--muted);margin-top:8px}
-    .card{background:var(--card);padding:18px;border-radius:10px;box-shadow:0 6px 18px rgba(4,6,12,0.6)}
-    .btn{display:inline-block;padding:10px 14px;border-radius:8px;background:var(--accent);color:#032024;font-weight:700;text-decoration:none}
-    .small{font-size:13px;color:var(--muted)}
-    section{margin-top:20px}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    ul.rules{padding-left:18px;color:var(--muted)}
-    footer{margin-top:26px;color:var(--muted);font-size:13px;text-align:center}
-    /* responsive */
-    @media (max-width:880px){.hero{grid-template-columns:1fr} .grid{grid-template-columns:1fr} nav{display:none}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Drayzor Esports - Official BGMI Tryout Registration and Esports Updates">
+    <title>Drayzor Esports</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #0d0d0d;
+            color: white;
+            text-align: center;
+        }
+        header {
+            background: linear-gradient(90deg, #ff0000, #000000);
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        nav {
+            background-color: #111;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: red;
+        }
+        section {
+            padding: 20px;
+        }
+        iframe {
+            border: none;
+        }
+        footer {
+            background-color: #111;
+            padding: 15px;
+            font-size: 14px;
+        }
+        .youtube {
+            margin: 20px auto;
+            max-width: 560px;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="brand">
-        <div class="logo">DE</div>
-        <div>
-          <div style="font-weight:800">Drayzor Esports</div>
-          <div class="small">BGMI Tryouts • Live Streams • Join the squad</div>
-        </div>
-      </div>
-      <nav>
-        <a href="#tryouts">Tryouts</a>
-        <a href="#register">Register</a>
-        <a href="#live">Live</a>
-        <a href="#rules">Rules</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
 
-    <main>
-      <section class="hero card">
-        <div>
-          <h1>Drayzor Esports — BGMI TRYOUTS</h1>
-          <p class="lead">Agar aap competitive khelna chahte ho — register karo, participate karo aur selection process ke zariye Drayzor ke liye choose ho sakte ho. Neeche step-by-step sab diya hai.</p>
+<header>
+    🎮 Drayzor Esports 🎮
+</header>
 
-          <div style="margin-top:14px">
-            <a class="btn" href="#register">Register for Tryouts</a>
-            <a class="btn" style="margin-left:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)" href="#rules">View Rules</a>
-          </div>
+<nav>
+    <a href="#about">About Us</a>
+    <a href="#tryouts">Tryouts</a>
+    <a href="#youtube">YouTube</a>
+    <a href="#contact">Contact</a>
+</nav>
 
-          <div style="margin-top:12px" class="small">Note: Registration uses Google Forms (free). Live streaming options also free (YouTube/Streamlabs/Omlet).</div>
-        </div>
+<section id="about">
+    <h2>About Drayzor Esports</h2>
+    <p>Welcome to the official Drayzor Esports page! We are a competitive BGMI esports team looking for skilled players to join our squad.</p>
+</section>
 
-        <div>
-          <div class="card small">
-            <strong>Quick Info</strong>
-            <div style="margin-top:8px">
-              <div>Games: <strong>BGMI (Battlegrounds Mobile India)</strong></div>
-              <div>Format: <strong>Squad tryouts (custom rooms / scrims)</strong></div>
-              <div>Live: <strong>Yes — match streams & highlights</strong></div>
-            </div>
-          </div>
+<section id="tryouts">
+    <h2>Register for BGMI Tryouts</h2>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdetLdEAIWTD0qvN1tg-iqOGabkI30IdZdJt2-AV8h1H3BlPA/viewform?embedded=true" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+</section>
 
-          <div class="card small" style="margin-top:12px;text-align:center">
-            <strong>Live Now</strong>
-            <!-- IMPORTANT: Replace YOUR_CHANNEL_ID below with your YouTube channel ID to show live embed -->
-            <!-- EDIT HERE: put your YouTube channel id between the query param channel=YOUR_CHANNEL_ID -->
-            <div style="margin-top:8px">
-              <iframe id="yt-live" src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID" width="100%" height="210" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-              <div class="small" style="margin-top:8px">If your channel is not live the box will be blank — replace YOUR_CHANNEL_ID with your channel's ID.</div>
-            </div>
-          </div>
-        </div>
-      </section>
+<section id="youtube">
+    <h2>Watch Our YouTube Channel</h2>
+    <div class="youtube">
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed?listType=user_uploads&list=UCKxw081LvPIHBX-8mraqQ8g" frameborder="0" allowfullscreen></iframe>
+    </div>
+</section>
 
-      <section id="tryouts" class="card">
-        <h2>Tryouts kaise honge (Step-by-step)</h2>
-        <ol class="small">
-          <li><strong>Registration:</strong> Google Form se register karna hoga (IGN, mobile model, rank, K/D, MySocial links, availability).</li>
-          <li><strong>Screening:</strong> Organizers entries dekh ke shortlist karenge (rank, recent replays, behaviour).</li>
-          <li><strong>Warm-up & Rules Brief:</strong> Short meeting on live stream or Discord before matches.
-          </li>
-          <li><strong>Tryout Matches:</strong> Short scrims / custom rooms. Har player ko multiple matches diya jayega. Observers record karenge.</li>
-          <li><strong>Evaluation Metrics:</strong> K/D, damage, positioning, communication, teamplay, attitude.</li>
-          <li><strong>Selection:</strong> Top performers ko invite/contract offer. Public announcement on website + DM.</li>
-          <li><strong>Schedule & Timing:</strong> Sab players ko time slot milega — website pe schedule update rahega.</li>
-        </ol>
+<section id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:waleednawab77@gmail.com" style="color:red;">waleednawab77@gmail.com</a></p>
+    <p>Instagram: <a href="https://www.instagram.com/drayzor_live" style="color:red;" target="_blank">@drayzor_live</a></p>
+</section>
 
-        <div style="margin-top:12px" class="small">
-          <strong>Checklist for participants:</strong>
-          <ul class="rules">
-            <li>BGMI ID (IGN) and screenshot of rank</li>
-            <li>Stable internet (mobile data/Wi‑Fi)</li>
-            <li>Mic/headset for voice</li>
-            <li>No cheating; fair play required</li>
-          </ul>
-        </div>
-      </section>
+<footer>
+    &copy; 2025 Drayzor Esports. All Rights Reserved.
+</footer>
 
-      <section id="register" class="card">
-        <h2>Registration (Google Form)</h2>
-        <p class="small">Agar aapko coding nahi aati toh easiest yehi hai: Google Form bana lo aur iska embed code yahan paste kar do. Form banake "Send > &lt;&gt; Embed" se iframe code copy karein aur Yahan paste karein.</p>
-
-        <!-- EDIT HERE: Replace the src below with your Google Form embed src (iframe src attribute value) -->
-        <!-- Example form iframe (replace the URL):
-          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfExampleForm/viewform?embedded=true" width="100%" height="700" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-        -->
-
-        <div style="margin-top:12px">
-          <!-- Leave placeholder button live; user can click to open form in new tab -->
-          <a class="btn" href="#" onclick="window.open('https://forms.gle/','_blank')">Open example: Create Google Form</a>
-        </div>
-
-        <div style="margin-top:12px" class="small">Once you have the embed iframe, paste it into the HTML here (replace the commented example). Or simply paste the form link in the "Register" button by editing the <code>href</code>.</div>
-      </section>
-
-      <section id="live" class="card">
-        <h2>Live Streaming — Free Options (quick)</h2>
-        <p class="small">Aap freely YouTube / Streamlabs Mobile / Omlet Arcade use kar sakte ho. Agar aap mobile se directly stream karna chahte ho to Streamlabs mobile app simple rahega. Agar aap PC se professional stream chahte ho to phone ko PC pe mirror karke OBS me capture karo (free tools maujood hain).</p>
-
-        <div class="grid" style="margin-top:12px">
-          <div class="card small">
-            <strong>Option A — Direct mobile stream (easiest)</strong>
-            <ol class="small">
-              <li>Install Streamlabs (Android/iOS) — login to your YouTube/Twitch account.</li>
-              <li>Use "Screen Share" within app to stream gameplay directly.</li>
-              <li>Advantages: no PC, easy alerts/chat.
-              </li>
-            </ol>
-            <div class="small">(Streamlabs mobile is free to use for single platform streaming.)</div>
-          </div>
-
-          <div class="card small">
-            <strong>Option B — PC + OBS (more control)</strong>
-            <ol class="small">
-              <li>Mirror Android screen to PC using <strong>scrcpy</strong> (USB + enable developer options).</li>
-              <li>Open scrcpy window, then in OBS add a "Window Capture" or "Game Capture" of the scrcpy window.</li>
-              <li>Stream from OBS to YouTube (use stream key) — more overlays, scenes, webcam, and mic control.</li>
-            </ol>
-            <div class="small">(scrcpy is free and open-source; OBS is free.)</div>
-          </div>
-        </div>
-
-        <div style="margin-top:12px;color:var(--muted);font-size:13px">
-          NOTE: YouTube has some eligibility rules for live streaming (verification, no strikes, and mobile streaming often needs a small subscriber minimum). Also YouTube raised the minimum streaming age recently — check your channel settings before planning a stream.
-        </div>
-      </section>
-
-      <section id="rules" class="card">
-        <h2>Rules (sample) — customize as needed</h2>
-        <ul class="rules">
-          <li>No cheating / hacks — immediate disqualification.</li>
-          <li>Be on time — late arrivals may be skipped.</li>
-          <li>Respect organizers and other players.</li>
-          <li>Keep voice chat on — communication is scored.</li>
-          <li>Selection decisions final — organizers reserve right to make changes.</li>
-        </ul>
-      </section>
-
-      <section id="contact" class="card">
-        <h2>Contact & Socials</h2>
-        <p class="small">Email: <strong>drayzor.esports@example.com</strong> (replace with your email)</p>
-        <p class="small">Discord: <strong>Drayzor#1234</strong> — replace with your server link</p>
-        <p class="small">YouTube / Twitch / Instagram — add links in the footer by editing the HTML.</p>
-      </section>
-
-    </main>
-
-    <footer>
-      <div class="small">Made with ❤️ for Drayzor Esports — Copy &amp; paste this file as <code>index.html</code>. Good luck with tryouts!</div>
-    </footer>
-  </div>
-
-  <script>
-    // small helper: open edit links or alert for placeholders
-    document.addEventListener('click', function(e){
-      if(e.target && e.target.matches('a[href="#"]')){
-        e.preventDefault();
-        alert('Replace the placeholder links in the HTML with your Google Form link or channel link. See chat instructions for exact steps.');
-      }
-    });
-  </script>
 </body>
 </html>
