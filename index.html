@@ -1,93 +1,254 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Drayzor Esports - Official BGMI Tryout Registration and Esports Updates">
-    <title>Drayzor Esports</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #0d0d0d;
-            color: white;
-            text-align: center;
-        }
-        header {
-            background: linear-gradient(90deg, #ff0000, #000000);
-            padding: 20px;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        nav {
-            background-color: #111;
-            padding: 10px;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-        }
-        nav a:hover {
-            color: red;
-        }
-        section {
-            padding: 20px;
-        }
-        iframe {
-            border: none;
-        }
-        footer {
-            background-color: #111;
-            padding: 15px;
-            font-size: 14px;
-        }
-        .youtube {
-            margin: 20px auto;
-            max-width: 560px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Drayzor Esports — BGMI Tryouts</title>
+  <meta name="description" content="Drayzor Esports — BGMI tryouts, register, live streams, contact" />
+  <meta name="theme-color" content="#0b0b0b" />
+  <style>
+    :root{
+      --bg1:#070607;
+      --bg2:#12060a;
+      --accent:#ff2b2b;
+      --muted:#bfc6d6;
+      --card: rgba(255,255,255,0.03);
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      --maxw:1040px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(255,30,30,0.05), transparent),
+                  linear-gradient(180deg,var(--bg1), var(--bg2));
+      color:#eaf0ff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .wrap{max-width:var(--maxw);margin:28px auto;padding:20px}
+    header{display:flex;gap:18px;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{
+      width:64px;height:64px;border-radius:12px;
+      background:linear-gradient(135deg,#ff4b4b 0%, #ff1f1f 60%);
+      display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(255,30,30,0.12);
+      flex-shrink:0;
+    }
+    .logo svg{width:42px;height:42px;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.6))}
+    .brand .title{font-weight:800;font-size:18px;line-height:1}
+    .brand .sub{font-size:12px;color:var(--muted);margin-top:2px}
+
+    nav{display:flex;gap:12px;align-items:center}
+    .btn{background:transparent;padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);color:var(--muted);text-decoration:none;font-weight:700;font-size:13px}
+    .btn.primary{background:var(--accent);color:#12060a;border:0;padding:9px 14px}
+    .btn:active{transform:translateY(1px)}
+
+    main{margin-top:18px}
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(6,6,10,0.6)}
+    h1{margin:0;font-size:22px}
+    p.lead{color:var(--muted);margin-top:8px;font-size:14px}
+
+    /* live box */
+    .live-box iframe{width:100%;height:220px;border-radius:10px;border:0;background:#000}
+    .socials{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .socials a{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;text-decoration:none;font-weight:700;color:white;background:rgba(0,0,0,0.25)}
+    .socials a svg{width:18px;height:18px;opacity:0.95}
+
+    section{margin-top:18px}
+    .rules ul{padding-left:18px;color:var(--muted);line-height:1.6}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* responsive */
+    @media (max-width:940px){
+      .grid{grid-template-columns:1fr}
+      .live-box iframe{height:200px}
+    }
+    @media (max-width:520px){
+      header{flex-direction:column;align-items:flex-start;gap:12px}
+      .logo{width:56px;height:56px}
+    }
+
+    /* animated header text */
+    .glow{
+      background: linear-gradient(90deg,#fff 0%, #ffd6d6 35%, #ff9a9a 65%, #fff 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      animation: shine 3s linear infinite;
+      display:inline-block;font-weight:900;
+    }
+    @keyframes shine{
+      0%{background-position:-200%}
+      100%{background-position:200%}
+    }
+
+    footer{margin-top:26px;text-align:center;color:var(--muted);font-size:13px}
+  </style>
 </head>
 <body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- temporary SVG esports logo -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="#09090a">
+            <defs>
+              <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#fff"/>
+                <stop offset="1" stop-color="#fff" stop-opacity="0.2"/>
+              </linearGradient>
+            </defs>
+            <rect x="4" y="8" width="56" height="48" rx="8" fill="url(#g)"/>
+            <path d="M18 44 L26 20 L34 44 L42 20 L50 44" stroke="#300" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <circle cx="32" cy="28" r="3.2" fill="#ffeded"/>
+          </svg>
+        </div>
+        <div>
+          <div class="title"><span class="glow">Drayzor Esports</span></div>
+          <div class="sub">BGMI Tryouts • Live Streams • Competitive Team</div>
+        </div>
+      </div>
 
-<header>
-    🎮 Drayzor Esports 🎮
-</header>
+      <nav>
+        <a class="btn" href="#about">Home</a>
+        <a class="btn" href="#tryouts">Tryouts</a>
+        <a class="btn" href="#youtube">YouTube</a>
+        <a class="btn" href="#contact">Contact</a>
+        <a class="btn primary" href="#tryouts">Register</a>
+      </nav>
+    </header>
 
-<nav>
-    <a href="#about">About Us</a>
-    <a href="#tryouts">Tryouts</a>
-    <a href="#youtube">YouTube</a>
-    <a href="#contact">Contact</a>
-</nav>
+    <main>
+      <div class="grid">
+        <!-- left column -->
+        <div>
+          <section class="card" id="about">
+            <h1>Welcome to <span style="color:var(--accent)">Drayzor Esports</span></h1>
+            <p class="lead">Aapke liye organized BGMI tryouts — register karo, perform karo aur Drayzor squad ka hissa bano. Neeche sab steps aur live streaming setup diya gaya hai.</p>
 
-<section id="about">
-    <h2>About Drayzor Esports</h2>
-    <p>Welcome to the official Drayzor Esports page! We are a competitive BGMI esports team looking for skilled players to join our squad.</p>
-</section>
+            <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+              <a class="btn primary" href="#tryouts">Register for Tryouts</a>
+              <a class="btn" href="https://www.instagram.com/drayzor_live" target="_blank">Follow Instagram</a>
+            </div>
 
-<section id="tryouts">
-    <h2>Register for BGMI Tryouts</h2>
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdetLdEAIWTD0qvN1tg-iqOGabkI30IdZdJt2-AV8h1H3BlPA/viewform?embedded=true" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-</section>
+            <section style="margin-top:14px">
+              <h3 style="margin:0 0 8px 0">Tryouts Process (Quick)</h3>
+              <ol class="small" style="text-align:left;color:var(--muted);padding-left:16px">
+                <li>Register via the form below (IGN, BGMI ID, rank screenshot, contact).</li>
+                <li>Shortlist based on rank & replays.</li>
+                <li>Warm-up & briefing (Discord)</li>
+                <li>Tryout matches (custom rooms / scrims)</li>
+                <li>Evaluation & selection announcement</li>
+              </ol>
+            </section>
 
-<section id="youtube">
-    <h2>Watch Our YouTube Channel</h2>
-    <div class="youtube">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed?listType=user_uploads&list=UCKxw081LvPIHBX-8mraqQ8g" frameborder="0" allowfullscreen></iframe>
-    </div>
-</section>
+            <section style="margin-top:12px" class="rules">
+              <h3 style="margin-bottom:6px">Checklist for players</h3>
+              <ul>
+                <li>Stable internet & working mic</li>
+                <li>No cheating — instant disqualification</li>
+                <li>Be punctual for your time slot</li>
+                <li>Respect teammates & organizers</li>
+              </ul>
+            </section>
+          </section>
 
-<section id="contact">
-    <h2>Contact Us</h2>
-    <p>Email: <a href="mailto:waleednawab77@gmail.com" style="color:red;">waleednawab77@gmail.com</a></p>
-    <p>Instagram: <a href="https://www.instagram.com/drayzor_live" style="color:red;" target="_blank">@drayzor_live</a></p>
-</section>
+          <!-- Tryouts / Form -->
+          <section class="card" id="tryouts" style="margin-top:16px">
+            <h2 style="margin-top:0">Register for BGMI Tryouts</h2>
+            <p class="small" style="margin-bottom:10px">Form below — fill sab fields required. (If embed nahi dikhe to form link click karein.)</p>
 
-<footer>
-    &copy; 2025 Drayzor Esports. All Rights Reserved.
-</footer>
+            <!-- <--- GOOGLE FORM EMBED (user-provided) ---> -->
+            <div style="width:100%;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.04)">
+              <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdetLdEAIWTD0qvN1tg-iqOGabkI30IdZdJt2-AV8h1H3BlPA/viewform?embedded=true"
+                      width="100%" height="720" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            </div>
 
+            <div style="margin-top:10px;text-align:left" class="small">
+              Tip: Google Forms responses will be collected in the linked Google Sheets — check responses from your Google account.
+            </div>
+          </section>
+
+          <!-- Contact quick -->
+          <section style="margin-top:12px" class="card" id="contact">
+            <h3 style="margin-top:0">Contact & Socials</h3>
+            <p class="small">Email: <a href="mailto:waleednawab77@gmail.com" style="color:var(--accent)">waleednawab77@gmail.com</a></p>
+            <p class="small">Instagram: <a href="https://www.instagram.com/drayzor_live" target="_blank" style="color:var(--accent)">@drayzor_live</a></p>
+            <div class="small" style="margin-top:8px">Discord: <em style="color:var(--muted)">(Add your server/invite — edit this text in HTML)</em></div>
+          </section>
+        </div>
+
+        <!-- right column -->
+        <aside>
+          <div class="card">
+            <h3 style="margin:0">Live Now</h3>
+            <div class="small" style="margin-top:8px">Agar aap live hain to yahan stream dikhega (YouTube). Agar blank aaye to channel live nahi hai.</div>
+
+            <div class="live-box" style="margin-top:10px">
+              <!-- YouTube live embed using Channel ID (shows live when streaming) -->
+              <iframe src="https://www.youtube.com/embed/live_stream?channel=UCKxw081LvPIHBX-8mraqQ8g"
+                      allow="autoplay; encrypted-media; picture-in-picture; web-share"
+                      allowfullscreen></iframe>
+            </div>
+
+            <div style="margin-top:12px" class="small">YouTube Channel: <a href="https://www.youtube.com/@drayzorlive" target="_blank" style="color:var(--accent)">@drayzorlive</a></div>
+
+            <hr style="border:none;height:1px;background:rgba(255,255,255,0.03);margin:12px 0;border-radius:2px" />
+
+            <div>
+              <strong style="display:block">Quick Streaming Options</strong>
+              <div class="small" style="margin-top:6px;text-align:left;color:var(--muted)">
+                • Mobile — Streamlabs Mobile (screen share) — easiest.<br>
+                • PC — Mirror phone with <strong>scrcpy</strong> + <strong>OBS Studio</strong> for overlays and better control.
+              </div>
+            </div>
+
+            <div style="margin-top:12px">
+              <div class="socials">
+                <a href="https://www.instagram.com/drayzor_live" target="_blank" title="Instagram">
+                  <!-- instagram svg -->
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5z" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 6.5h.01" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Instagram
+                </a>
+
+                <a href="https://www.youtube.com/@drayzorlive" target="_blank" title="YouTube">
+                  <!-- youtube svg -->
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 8.2s-.2-1.5-.8-2.2c-.8-1-1.7-1-2.1-1.1C16.6 4.6 12 4.6 12 4.6h0s-4.6 0-6.9.3c-.4.1-1.3.1-2.1 1.1C2.2 6.7 2 8.2 2 8.2S1.8 9.9 1.8 11.6v0c0 1.7.2 3.4.2 3.4s.2 1.5.8 2.2c.8 1 1.9 1 2.4 1.1 1.7.2 7.1.3 7.1.3s4.6 0 6.9-.3c.4-.1 1.3-.1 2.1-1.1.6-.7.8-2.2.8-2.2s.2-1.7.2-3.4v0c0-1.7-.2-3.4-.2-3.4z" stroke="#fff" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14l5-3-5-3v6z" fill="#fff"/></svg>
+                  YouTube
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- small info card -->
+          <div class="card" style="margin-top:12px">
+            <h4 style="margin:0">Rules (short)</h4>
+            <ul class="small" style="text-align:left;color:var(--muted);padding-left:16px;margin-top:8px">
+              <li>No cheating/hacks — disqualify</li>
+              <li>Be on time — time slots strict</li>
+              <li>Voice required — communication scored</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      <div>&copy; <span id="year"></span> Drayzor Esports • Built with ❤️</div>
+      <div class="small" style="margin-top:6px">Made by Waleed • Email: <a href="mailto:waleednawab77@gmail.com" style="color:var(--accent)">waleednawab77@gmail.com</a></div>
+    </footer>
+  </div>
+
+  <script>
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // small check: if youtube iframe fails to load (channel not live), no error - stays empty
+    // If you want to show latest uploads instead of live, replace iframe src with:
+    // "https://www.youtube.com/embed?listType=user_uploads&list=UCKxw081LvPIHBX-8mraqQ8g"
+  </script>
 </body>
 </html>
