@@ -10,7 +10,7 @@
   <style>
     :root{
       --bg:#070607; --accent:#ff2b2b; --accent2:#ff6b6b; --muted:#9fb0cc; --card:rgba(255,255,255,0.02);
-      --radius:14px; --maxw:1100px; --shadow: 0 12px 32px rgba(3,6,12,0.65);
+      --radius:12px; --maxw:1100px; --shadow: 0 12px 32px rgba(3,6,12,0.65);
     }
     *{box-sizing:border-box} html,body{height:100%}
     body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:
@@ -40,6 +40,9 @@
     footer{margin-top:22px;text-align:center;color:var(--muted);font-size:13px}
     .socials{display:flex;gap:8px;margin-top:10px}
     .social-btn{display:inline-flex;gap:8px;align-items:center;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.03);color:#fff;text-decoration:none;font-weight:800}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    button.control-btn{background:linear-gradient(90deg,var(--accent),var(--accent2));border:0;padding:8px 12px;border-radius:10px;color:#12060a;font-weight:800;cursor:pointer}
+    button.ghost-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer}
     @media (max-width:980px){.hero-grid,.grid{grid-template-columns:1fr} .live-iframe{height:200px}}
     @media (max-width:520px){header{flex-direction:column;align-items:flex-start}.logo-box{width:56px;height:56px}}
   </style>
@@ -90,24 +93,22 @@
               <div class="muted" style="font-size:13px">Channel: @drayzorlive</div>
             </div>
 
-            <!-- Primary live iframe: shows live if channel is streaming -->
+            <!-- PRIMARY LIVE IFRAME: auto shows live when you stream -->
             <div style="margin-top:12px">
-              <iframe id="liveFrame" class="live-iframe"
+              <iframe id="mainPlayer" class="live-iframe"
                 src="https://www.youtube.com/embed/live_stream?channel=UCKxw081LvPIHBX-8mraqQ8g"
                 allow="autoplay; encrypted-media; picture-in-picture; web-share"
                 allowfullscreen title="Drayzor Live"></iframe>
             </div>
 
-            <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-              <a class="social-btn" href="https://www.youtube.com/@drayzorlive" target="_blank">YouTube</a>
-              <a class="social-btn" href="https://www.instagram.com/drayzor_live" target="_blank">Instagram</a>
-              <button id="showUploads" class="social-btn" style="cursor:pointer">View Latest Uploads</button>
+            <!-- Controls to switch to latest upload / view channel -->
+            <div class="controls">
+              <button id="playLatest" class="control-btn">Play Latest Upload</button>
+              <button id="viewChannel" class="ghost-btn">View Channel</button>
+              <button id="openInYT" class="ghost-btn">Open in YouTube</button>
             </div>
 
-            <div id="uploadsContainer" style="margin-top:10px;display:none">
-              <!-- Fallback: latest uploads (user_uploads list) -->
-              <iframe id="uploadsFrame" class="live-iframe" src="https://www.youtube.com/embed?listType=user_uploads&list=UCKxw081LvPIHBX-8mraqQ8g" allowfullscreen title="Latest uploads"></iframe>
-            </div>
+            <div id="statusMessage" class="muted" style="margin-top:10px">If you're live, the player above will show the live stream. Otherwise click "Play Latest Upload".</div>
           </div>
 
           <div class="card" style="margin-top:12px">
@@ -129,7 +130,7 @@
           <p class="muted">Fill the form below — required fields help us shortlist properly.</p>
 
           <div class="form-wrap" style="margin-top:12px">
-            <!-- GOOGLE FORM EMBED: (user provided) -->
+            <!-- GOOGLE FORM EMBED (user provided) -->
             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdetLdEAIWTD0qvN1tg-iqOGabkI30IdZdJt2-AV8h1H3BlPA/viewform?embedded=true"
               width="100%" height="760" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
           </div>
@@ -164,15 +165,12 @@
               <div class="role" style="margin-top:6px">Assaulter</div>
             </div>
           </div>
-
-          <div style="margin-top:12px" class="muted">(Add more players later — edit HTML to update roster.)</div>
         </div>
 
         <div class="card" style="margin-top:12px" id="contact">
           <h2>Contact</h2>
           <p class="muted">Email: <a href="mailto:waleednawab77@gmail.com" style="color:var(--accent)">waleednawab77@gmail.com</a></p>
           <p class="muted">Instagram: <a href="https://www.instagram.com/drayzor_live" target="_blank" style="color:var(--accent)">@drayzor_live</a></p>
-          <div style="margin-top:8px" class="muted">Want Discord invite button here? Paste your invite link and I'll integrate.</div>
         </div>
       </aside>
     </div>
@@ -184,18 +182,37 @@
   </div>
 
   <script>
+    // fill year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Toggle to show latest uploads iframe (fallback view)
-    const btn = document.getElementById('showUploads');
-    const uploads = document.getElementById('uploadsContainer');
-    btn.addEventListener('click', () => {
-      uploads.style.display = uploads.style.display === 'none' || uploads.style.display === '' ? 'block' : 'none';
-      btn.textContent = uploads.style.display === 'block' ? 'Hide Latest Uploads' : 'View Latest Uploads';
+    // Channel values
+    const CHANNEL_ID = 'UCKxw081LvPIHBX-8mraqQ8g';
+    const CHANNEL_URL = 'https://www.youtube.com/@drayzorlive';
+    const MAIN_PLAYER = document.getElementById('mainPlayer');
+    const playLatestBtn = document.getElementById('playLatest');
+    const viewChannelBtn = document.getElementById('viewChannel');
+    const openInYtBtn = document.getElementById('openInYT');
+    const status = document.getElementById('statusMessage');
+
+    // When user clicks "Play Latest Upload", swap iframe to uploads playlist (autoplay=1)
+    playLatestBtn.addEventListener('click', () => {
+      // latest uploads playlist embed (autoplay attempt)
+      MAIN_PLAYER.src = `https://www.youtube.com/embed?listType=user_uploads&list=${CHANNEL_ID}&autoplay=1`;
+      status.textContent = 'Showing latest uploads from the channel.';
     });
 
-    // Note: primary iframe points to /embed/live_stream?channel=... which shows live automatically when streaming.
-    // No API key needed. If you want auto-detect (live vs not-live) and show/hide automatically, we can add server/API checks (requires YouTube Data API key).
+    // View channel in a new tab (channel page)
+    viewChannelBtn.addEventListener('click', () => {
+      window.open(CHANNEL_URL, '_blank');
+    });
+
+    // Open the currently loaded iframe in YouTube (if live open live page, else channel)
+    openInYtBtn.addEventListener('click', () => {
+      window.open(CHANNEL_URL, '_blank');
+    });
+
+    // NOTE: Fully automatic "detect live and swap to latest" requires YouTube Data API (server or client with API key).
+    // If you want automatic detection, I can add it — you'll need to create a Google Cloud API key and share it.
   </script>
 </body>
 </html>
